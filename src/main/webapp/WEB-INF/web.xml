@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app>
+	<display-name>Websql application</display-name>
+	
+	<servlet>
+		<servlet-name>Websql Servlet</servlet-name>
+		<servlet-class>fr.formation.websql.BlogServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Websql Servlet</servlet-name>
+		<url-pattern>/blog.html</url-pattern>
+	</servlet-mapping>
+</web-app>
