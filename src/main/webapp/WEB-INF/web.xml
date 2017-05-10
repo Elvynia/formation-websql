@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
 	<display-name>Websql application</display-name>
-	
+
+	<filter>
+		<filter-name>Force encoding filter</filter-name>
+		<filter-class>fr.formation.websql.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
 	<servlet>
 		<servlet-name>Websql Servlet</servlet-name>
 		<servlet-class>fr.formation.websql.BlogServlet</servlet-class>
 	</servlet>
-	
+	<servlet>
+		<servlet-name>Delete article Servlet</servlet-name>
+		<servlet-class>fr.formation.websql.DeleteArticleServlet</servlet-class>
+	</servlet>
+
+	<filter-mapping>
+		<filter-name>Force encoding filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<servlet-mapping>
 		<servlet-name>Websql Servlet</servlet-name>
 		<url-pattern>/blog.html</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Delete article Servlet</servlet-name>
+		<url-pattern>/delete.html</url-pattern>
 	</servlet-mapping>
 </web-app>
