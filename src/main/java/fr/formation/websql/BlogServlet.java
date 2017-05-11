@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.formation.websql.db.ArticleDao;
+import fr.formation.websql.entity.Article;
+
 public class BlogServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -25,6 +28,8 @@ public class BlogServlet extends HttpServlet {
 			"Morbi blandit commodo est sed ornare. In feugiat nunc ornare, facilisis nunc et, finibus enim. Nam bibendum sed est eget tempor. Quisque lorem ligula, pharetra pellentesque volutpat ut, facilisis sed nisi. Cras ultricies odio massa, non ullamcorper nunc vehicula ac. Mauris in felis commodo, pulvinar dui eu, lacinia urna. Etiam tincidunt lectus vel odio ullamcorper fringilla. Maecenas vestibulum diam non lectus venenatis egestas. Duis sagittis nec leo non ultricies. Proin elementum malesuada nisl id vestibulum. Quisque aliquam pretium augue, et sollicitudin ex gravida at. Proin sed purus at tortor sollicitudin placerat eu at libero. Mauris ultrices gravida tellus, sit amet vestibulum nibh suscipit ac.",
 			"Duis in semper mi, a vestibulum velit. Quisque consectetur magna nunc, elementum vestibulum nunc sagittis pharetra. Pellentesque consequat laoreet nunc sit amet auctor. Donec vel accumsan turpis. Cras fermentum facilisis urna eu placerat. Donec viverra vulputate nibh non gravida. Fusce non leo sed enim dictum posuere ac at sapien. Sed ullamcorper nunc a dapibus viverra. Phasellus posuere non tortor pharetra auctor. Mauris ut nisi arcu. Sed non purus vitae magna feugiat facilisis quis ut tortor. Ut erat ex, faucibus a urna vel, feugiat porta arcu. Nullam eget maximus sapien. Quisque sit amet porttitor nisi. Morbi felis nisi, lacinia sed molestie ut, convallis a nisl. Donec a lacus feugiat, tempus lacus eget, tempus tellus."));
 
+	private final ArticleDao articleDao = new ArticleDao();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		this.forward(req, resp);
@@ -32,10 +37,17 @@ public class BlogServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		BlogServlet.LOGGER.debug("Titre saisi : {}", req.getParameter("title"));
+		String title = req.getParameter("title");
+		BlogServlet.LOGGER.debug("Titre saisi : {}", title);
 		String description = req.getParameter("description");
 		BlogServlet.LOGGER.debug("Description saisie : {}", description);
 		BlogServlet.ARTICLES.add(description);
+		final Article article = this.articleDao.create(new Article(title, description));
+		if (article != null && article.getId() != null) {
+			BlogServlet.LOGGER.debug("L'article de titre '{}' a bien été créé avec l'id : {}", title, article.getId());
+		} else {
+			BlogServlet.LOGGER.error("L'article n'a pas pu être créé ou l'identifiant n'a pas pu être récupéré.");
+		}
 		this.forward(req, resp);
 	}
 
