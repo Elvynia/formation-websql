@@ -20,9 +20,13 @@
 	<c:forEach items="${articles}" var="article">
 		<div>
 			<c:url value="/images/delete.png" var="deleteUrl" />
-			<h2>Article n°<%= i %> <a href="delete.html?index=<%= i - 1 %>"><img src="${deleteUrl}"></a></h2>			
+			<!-- Important à savoir, même si on écrit article.id, c'est article.getId() qui sera utilisé ! -->
+			<h2>${article.title} (id=${article.id}) <a href="delete.html?id=${article.id}"><img src="${deleteUrl}"></a></h2>			
 			<p>
-				<c:out value="${article}" />
+				<!-- L'utilisation de c:out n'est pas obligatoire mais est préféré selon certaines bonnes pratiques.
+				Cela dépend des gens avec qui on travaille, étant donné que JSF est plus souvent utilisé les JSTL sont
+				un peu obsolètes, mais il faut les connaître. -->
+				<c:out value="${article.description}" />
 			</p>
 		</div>
 		<% ++i; %>

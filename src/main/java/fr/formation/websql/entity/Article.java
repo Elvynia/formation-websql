@@ -3,21 +3,25 @@ package fr.formation.websql.entity;
 public class Article {
 
 	private Integer id;
-	
+
 	private String title;
-	
+
 	private String description;
-	
+
 	public Article() {
 	}
-	
+
 	public Article(final String title, final String description) {
 		this.title = title;
 		this.description = description;
 	}
-	
+
 	public Article(final Integer id, final String title, final String description) {
 		this(title, description);
+		this.id = id;
+	}
+
+	public Article(int id) {
 		this.id = id;
 	}
 
@@ -43,24 +47,27 @@ public class Article {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 *            the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 }
