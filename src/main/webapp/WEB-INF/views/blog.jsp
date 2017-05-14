@@ -20,8 +20,16 @@
 	<c:forEach items="${articles}" var="article">
 		<div>
 			<c:url value="/images/delete.png" var="deleteUrl" />
+			<c:url value="/images/edit.png" var="editUrl" />
 			<!-- Important à savoir, même si on écrit article.id, c'est article.getId() qui sera utilisé ! -->
-			<h2>${article.title} (id=${article.id}) <a href="delete.html?id=${article.id}"><img src="${deleteUrl}"></a></h2>			
+			<h2>${article.title} (id=${article.id})
+				<a href="delete.html?id=${article.id}">
+					<img src="${deleteUrl}">
+				</a>
+				<a href="edit.html?id=${article.id}">
+					<img src="${editUrl}">
+				</a>
+			</h2>			
 			<p>
 				<!-- L'utilisation de c:out n'est pas obligatoire mais est préféré selon certaines bonnes pratiques.
 				Cela dépend des gens avec qui on travaille, étant donné que JSF est plus souvent utilisé les JSTL sont

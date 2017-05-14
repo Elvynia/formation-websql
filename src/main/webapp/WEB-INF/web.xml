@@ -22,6 +22,10 @@
 		<servlet-name>Delete article Servlet</servlet-name>
 		<servlet-class>fr.formation.websql.DeleteArticleServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Edit article Servlet</servlet-name>
+		<servlet-class>fr.formation.websql.EditArticleServlet</servlet-class>
+	</servlet>
 
 	<filter-mapping>
 		<filter-name>Force encoding filter</filter-name>
@@ -35,5 +39,9 @@
 	<servlet-mapping>
 		<servlet-name>Delete article Servlet</servlet-name>
 		<url-pattern>/delete.html</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Edit article Servlet</servlet-name>
+		<url-pattern>/edit.html</url-pattern>
 	</servlet-mapping>
 </web-app>

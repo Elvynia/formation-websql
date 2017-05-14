@@ -44,6 +44,8 @@ public class BlogServlet extends HttpServlet {
 	private void forward(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("page_title", BlogServlet.APP_TITLE);
 		req.setAttribute("articles", this.articleDao.readAll());
+		final int editId = req.getParameter("editId") != null ? Integer.parseInt(req.getParameter("editId")) : -1;
+		req.setAttribute("editId", editId);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/views/blog.jsp").forward(req, resp);
 	}
 }
