@@ -61,8 +61,8 @@ public class ArticleDao extends AbstractDao<Article> {
 			// Ici on peut se servir de la valeur de retour du premier déplacement du curseur.
 			// En effet si il n'y a aucun résultat, le premier next() renvoi false.
 			if (rs.next()) {
-				entity.setTitle("TITLE");
-				entity.setDescription("DESCRIPTION");
+				entity.setTitle(rs.getString("TITLE"));
+				entity.setDescription(rs.getString("DESCRIPTION"));
 				result = entity;
 			}
 		} catch (SQLException e) {
